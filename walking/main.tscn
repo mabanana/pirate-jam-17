@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://c6wa8pm613ijr"]
+
+[ext_resource type="Script" uid="uid://dvwbunjvoehm8" path="res://walking/map.gd" id="1_xur7c"]
+[ext_resource type="Shader" uid="uid://7e5flmw6i4si" path="res://walking/floor.gdshader" id="2_pc5u0"]
+[ext_resource type="Script" uid="uid://cxc14apyll1ce" path="res://walking/grid_texture.gd" id="3_g8xml"]
+[ext_resource type="Script" uid="uid://b16ykymto5pu5" path="res://walking/player.gd" id="3_pc5u0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8xml"]
+render_priority = 0
+shader = ExtResource("2_pc5u0")
+shader_parameter/line_width = Vector2(0.05, 0.05)
+shader_parameter/uv_scale = Vector2(10, 10)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_d82b5"]
+material = SubResource("ShaderMaterial_g8xml")
+size = Vector2(10, 7)
+subdivide_width = 10
+subdivide_depth = 7
+
+[sub_resource type="BoxMesh" id="BoxMesh_pc5u0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pc5u0"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_g8xml"]
+material = SubResource("StandardMaterial3D_pc5u0")
+size = Vector3(0.2, 0.4, 0.2)
+
+[node name="Main" type="Node3D"]
+
+[node name="Overview" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6.01692, 0)
+projection = 1
+size = 8.619
+
+[node name="Map" type="Node3D" parent="."]
+script = ExtResource("1_xur7c")
+
+[node name="FloorPlane" type="MeshInstance3D" parent="Map"]
+mesh = SubResource("PlaneMesh_d82b5")
+skeleton = NodePath("../..")
+script = ExtResource("3_g8xml")
+
+[node name="Player" type="Node3D" parent="."]
+script = ExtResource("3_pc5u0")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0)
+current = true
+
+[node name="Marker" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_pc5u0")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0, 1, 0)
+mesh = SubResource("PrismMesh_g8xml")
+skeleton = NodePath("../Marker")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
+light_energy = 1.808
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Change View"
+
+[connection signal="pressed" from="CanvasLayer/Button" to="Map" method="_on_view_change"]

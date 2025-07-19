@@ -1,10 +1,8 @@
 @tool
 extends MeshInstance3D
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	mesh.material.set_shader_parameter("uv_scale", mesh.size)
-	pass # Replace with function body.
+func set_grid(uv_scale):
+	mesh.material.set_shader_parameter("uv_scale", uv_scale)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

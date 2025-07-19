@@ -2,6 +2,7 @@ extends Node
 
 @export var ray_length = 1.2
 @export var camera: Camera3D
+@export var cursor: Control
 
 var focus: Node3D
 
@@ -27,5 +28,11 @@ func _process(delta):
 		if result["collider"] != focus:
 			focus = result["collider"]
 			print(focus.name)
+			cursor.label.text = focus.name
+			cursor.label.visible = true
+			cursor.cursor.visible = false
+			
 	else:
 		focus = null
+		cursor.label.visible = false
+		cursor.cursor.visible = true

@@ -1,24 +1,23 @@
 extends Node3D
 
 signal player_moved
-var facing = 0
+
+@export var facing = 2
+
 var facings = [
 	[-1,0,0],
 	[0,0,-1],
 	[1,0,0],
-	[0,0,1],
-	]
+	[0,0,1]]
 var facing_basis = [
 	Basis(Vector3(1.0, 0.0, 0.0), Vector3(0.0, 1.0, 0.0), Vector3(0.0, 0.0, 1.0)),
 	Basis(Vector3(-0.0, 0.0, 1.0), Vector3(0.0, 1.0, 0.0), Vector3(-1.0, 0.0, -0.0)),
 	Basis(Vector3(-1.0, 0.0, -0.0), Vector3(0.0, 1.0, 0.0), Vector3(0.0, 0.0, -1.0)),
-	Basis(Vector3(0.0, 0.0, -1.0), Vector3(0.0, 1.0, 0.0), Vector3(1.0, 0.0, 0.0)),
-]
+	Basis(Vector3(0.0, 0.0, -1.0), Vector3(0.0, 1.0, 0.0), Vector3(1.0, 0.0, 0.0))]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	transform = Transform3D(facing_basis[facing%len(facings)], position)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

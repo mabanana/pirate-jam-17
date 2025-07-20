@@ -9,9 +9,9 @@ func _ready():
 	Signals.object_interacted.connect(_on_object_interacted)
 
 func set_flag(flag_name, value = true):
-	if value != flag_name:
+	if value != get(flag_name):
 		Signals.progress_changed.emit(flag_name, value)
-	flag_name = value
+	set(flag_name, value)
 	
 	check_progress(flag_name, value)
 

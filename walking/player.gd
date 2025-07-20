@@ -1,7 +1,8 @@
 extends Node3D
 
 var player_move_requested = Signals.player_move_requested
-var player_moved = Signals.player_moved
+var player_move_resolved = Signals.player_move_resolved
+var player_rotated = Signals.player_rotated
 
 @export var facing = 2
 
@@ -19,7 +20,7 @@ var facing_basis = [
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	transform = Transform3D(facing_basis[facing%len(facings)], position)
-	player_moved.connect(move_tween)
+	player_move_resolved.connect(move_tween)
 
 func _input(event):
 	if event.is_action_pressed("ui_left"):
@@ -36,6 +37,7 @@ func _input(event):
 		print(facing, " ", basis)
 
 func rotate_tween():
+	player_rotated.emit(facing)
 	var tween:= get_tree().create_tween()
 	tween.set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property(self, "transform", Transform3D(facing_basis[facing%len(facings)], position), 0.6)

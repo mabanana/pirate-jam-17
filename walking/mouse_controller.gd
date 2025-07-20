@@ -6,6 +6,8 @@ extends Node
 
 var focus: Node3D
 
+var object_hover_entered = Signals.object_hover_entered
+var object_hover_exited = Signals.object_hover_exited
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,12 +29,19 @@ func _process(delta):
 	if result:
 		if result["collider"] != focus:
 			focus = result["collider"]
-			print(focus.name)
+			object_hover_entered.emit(focus.name)
 			cursor.label.text = focus.name
 			cursor.label.visible = true
 			cursor.cursor.visible = false
 			
 	else:
+		if focus:
+			object_hover_exited.emit(focus.name)
 		focus = null
 		cursor.label.visible = false
 		cursor.cursor.visible = true
+
+func _input(event):
+	if (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
+		if focus:
+			Signals.object_interacted.emit(focus.name)

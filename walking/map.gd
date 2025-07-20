@@ -7,6 +7,9 @@ var margin = 1
 var grid_map = {}
 var grid_pos = [0,0]
 
+var player_move_requested = Signals.player_move_requested
+var player_move_resolved = Signals.player_move_resolved
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	floor_plane.mesh.size = floor_size
@@ -18,16 +21,16 @@ func _ready():
 			var top_left = position - Vector3(floor_size.x / 2, position.y, floor_size.y / 2)
 			grid_map[[row, col]] = top_left + Vector3( margin*cell_size*(row+margin), 0, margin*cell_size*(col+margin))
 	
-	$"../Player".player_moved.connect(_move_player)
+	player_move_requested.connect(_move_player)
 	$"../Player".position = grid_map[grid_pos]
 
 func _on_view_change():
 	if $"../Player/Camera3D".current:
 		$"../Player/Camera3D".current = false
-		$"../Overview".current = true
+		$Overview.current = true
 	else:
 		$"../Player/Camera3D".current = true
-		$"../Overview".current = false
+		$Overview.current = false
 
 func _move_player(dir):
 	var x = dir[0]
@@ -36,4 +39,4 @@ func _move_player(dir):
 		grid_pos[0] += x
 		grid_pos[1] += y
 	
-	$"../Player".move_tween(grid_map[grid_pos])
+	player_move_resolved.emit(grid_map[grid_pos])

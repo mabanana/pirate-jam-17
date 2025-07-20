@@ -76,6 +76,7 @@ offset_bottom = 20.0
 rotation = -0.436332
 
 [node name="MouseLabel" type="Label" parent="CanvasLayer/Cursor"]
+layout_mode = 0
 offset_right = 104.0
 offset_bottom = 45.0
 text = "woooo"

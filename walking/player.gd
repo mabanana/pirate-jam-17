@@ -33,8 +33,6 @@ func _input(event):
 		player_move_requested.emit(facings[facing % len(facings)])
 	elif event.is_action_pressed("ui_down"):
 		player_move_requested.emit(facings[(facing + 2) % len(facings)])
-	elif event.is_action_pressed("ui_accept"):
-		print(facing, " ", basis)
 
 func rotate_tween():
 	player_rotated.emit(facing)

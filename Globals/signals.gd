@@ -3,6 +3,7 @@ extends Node
 
 signal object_interacted
 signal player_moved
+signal player_move_requested
 signal progress_changed
 
 func _ready():

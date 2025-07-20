@@ -27,12 +27,19 @@ func _process(delta):
 	if result:
 		if result["collider"] != focus:
 			focus = result["collider"]
-			print(focus.name)
+			print("MouseController: Mouse hovered over %s." % focus.name)
 			cursor.label.text = focus.name
 			cursor.label.visible = true
 			cursor.cursor.visible = false
 			
 	else:
+		if focus:
+			print("MouseController: Mouse removed from %s." % focus.name)
 		focus = null
 		cursor.label.visible = false
 		cursor.cursor.visible = true
+
+func _input(event):
+	if (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
+		if focus:
+			Signals.object_interacted.emit(focus.name)

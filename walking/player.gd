@@ -1,6 +1,7 @@
 extends Node3D
 
-signal player_moved
+var player_move_requested = Signals.player_move_requested
+var player_moved = Signals.player_moved
 
 @export var facing = 2
 
@@ -18,10 +19,7 @@ var facing_basis = [
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	transform = Transform3D(facing_basis[facing%len(facings)], position)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	player_moved.connect(move_tween)
 
 func _input(event):
 	if event.is_action_pressed("ui_left"):
@@ -31,11 +29,9 @@ func _input(event):
 		facing += 1
 		rotate_tween()
 	elif event.is_action_pressed("ui_up"):
-		player_moved.emit(facings[facing % len(facings)])
-		pass
+		player_move_requested.emit(facings[facing % len(facings)])
 	elif event.is_action_pressed("ui_down"):
-		player_moved.emit(facings[(facing + 2) % len(facings)])
-		pass
+		player_move_requested.emit(facings[(facing + 2) % len(facings)])
 	elif event.is_action_pressed("ui_accept"):
 		print(facing, " ", basis)
 

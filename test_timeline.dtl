@@ -1,0 +1,6 @@
+if {Object} == "Television":
+	Just a televison...
+if {Object} == "Drawer":
+	Stinks like drawer
+if {Object} == "Door":
+	I can't leave yet

@@ -13,7 +13,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _input(event: InputEvent):
 	var space_state = camera.get_world_3d().direct_space_state
 	var mousepos = camera.get_viewport().get_mouse_position()
 
@@ -21,9 +21,7 @@ func _process(delta):
 	var end = origin + camera.project_ray_normal(mousepos) * ray_length
 	var query = PhysicsRayQueryParameters3D.create(origin, end)
 	query.collide_with_areas = true
-
 	var result = space_state.intersect_ray(query)
-	
 	if result:
 		if result["collider"] != focus:
 			focus = result["collider"]
@@ -35,4 +33,7 @@ func _process(delta):
 	else:
 		focus = null
 		cursor.label.visible = false
-		cursor.cursor.visible = true
+	if (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
+		if result:
+			Dialogic.VAR.Object = str(focus.name)
+			Dialogic.start("test_timeline")

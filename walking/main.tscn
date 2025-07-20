@@ -1,0 +1,178 @@
+[gd_scene load_steps=21 format=3 uid="uid://c6wa8pm613ijr"]
+
+[ext_resource type="Script" uid="uid://dvwbunjvoehm8" path="res://walking/map.gd" id="1_xur7c"]
+[ext_resource type="Shader" uid="uid://7e5flmw6i4si" path="res://walking/floor.gdshader" id="2_pc5u0"]
+[ext_resource type="Script" uid="uid://cxc14apyll1ce" path="res://walking/grid_texture.gd" id="3_g8xml"]
+[ext_resource type="Script" uid="uid://b16ykymto5pu5" path="res://walking/player.gd" id="3_pc5u0"]
+[ext_resource type="Script" uid="uid://hk14xepsjsut" path="res://walking/mouse_controller.gd" id="5_d82b5"]
+[ext_resource type="Script" uid="uid://wpyipogt6464" path="res://walking/cursor.gd" id="6_p73i7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p73i7"]
+font_size = 32
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.584314)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8xml"]
+render_priority = 0
+shader = ExtResource("2_pc5u0")
+shader_parameter/line_width = Vector2(0.05, 0.05)
+shader_parameter/uv_scale = Vector2(5, 4)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_d82b5"]
+material = SubResource("ShaderMaterial_g8xml")
+size = Vector2(10, 8)
+subdivide_width = 10
+subdivide_depth = 7
+
+[sub_resource type="BoxMesh" id="BoxMesh_p73i7"]
+size = Vector3(0.2, 3, 2)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_p73i7"]
+points = PackedVector3Array(0.1, 1.5, 1, -0.1, 1.5, 1, 0.1, -1.5, 1, 0.1, 1.5, -1, -0.1, 1.5, -1, -0.1, -1.5, 1, 0.1, -1.5, -1, -0.1, -1.5, -1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l81vw"]
+size = Vector3(1, 1.5, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qi2kk"]
+points = PackedVector3Array(-0.5, -0.75, -0.5, -0.5, -0.75, 0.5, -0.5, 0.75, -0.5, 0.5, -0.75, -0.5, 0.5, -0.75, 0.5, -0.5, 0.75, 0.5, 0.5, 0.75, -0.5, 0.5, 0.75, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1kbht"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tc5xf"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v30lp"]
+size = Vector3(0.9, 0.9, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cpa15"]
+size = Vector3(3, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pc5u0"]
+size = Vector3(1, 1.6, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pc5u0"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_g8xml"]
+material = SubResource("StandardMaterial3D_pc5u0")
+size = Vector3(0.2, 0.4, 0.2)
+
+[node name="Main" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Cursor" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("label", "cursor")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_p73i7")
+label = NodePath("MouseLabel")
+cursor = NodePath("ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Cursor"]
+layout_mode = 0
+offset_right = 15.0
+offset_bottom = 20.0
+rotation = -0.436332
+
+[node name="MouseLabel" type="Label" parent="CanvasLayer/Cursor"]
+offset_right = 104.0
+offset_bottom = 45.0
+text = "woooo"
+label_settings = SubResource("LabelSettings_p73i7")
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+custom_minimum_size = Vector2(100, 100)
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Change View"
+
+[node name="Map" type="Node3D" parent="." node_paths=PackedStringArray("floor_plane")]
+script = ExtResource("1_xur7c")
+floor_plane = NodePath("FloorPlane")
+
+[node name="FloorPlane" type="MeshInstance3D" parent="Map"]
+mesh = SubResource("PlaneMesh_d82b5")
+skeleton = NodePath("../..")
+script = ExtResource("3_g8xml")
+
+[node name="Door" type="StaticBody3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.5, -2)
+
+[node name="StaticObject" type="MeshInstance3D" parent="Map/Door"]
+mesh = SubResource("BoxMesh_p73i7")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Door"]
+shape = SubResource("ConvexPolygonShape3D_p73i7")
+
+[node name="Drawer" type="StaticBody3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0.75, 0)
+
+[node name="StaticObject2" type="MeshInstance3D" parent="Map/Drawer"]
+mesh = SubResource("BoxMesh_l81vw")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Drawer"]
+shape = SubResource("ConvexPolygonShape3D_qi2kk")
+
+[node name="Television" type="StaticBody3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.99364, 1.08956, 3.68412)
+
+[node name="StaticObject3" type="MeshInstance3D" parent="Map/Television"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.229074)
+mesh = SubResource("BoxMesh_1kbht")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Television"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.229074)
+shape = SubResource("ConvexPolygonShape3D_tc5xf")
+
+[node name="StaticObject5" type="MeshInstance3D" parent="Map/Television"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.311885)
+mesh = SubResource("BoxMesh_v30lp")
+skeleton = NodePath("../../..")
+
+[node name="StaticObject4" type="MeshInstance3D" parent="Map/Television"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_cpa15")
+skeleton = NodePath("../../..")
+
+[node name="Overview" type="Camera3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6.01692, 0)
+projection = 1
+size = 8.619
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
+light_energy = 1.808
+
+[node name="Player" type="Node3D" parent="."]
+script = ExtResource("3_pc5u0")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2, 0)
+current = true
+
+[node name="Marker" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+mesh = SubResource("BoxMesh_pc5u0")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.25, 1.65, 0)
+mesh = SubResource("PrismMesh_g8xml")
+skeleton = NodePath("../Marker")
+
+[node name="MouseController" type="Node" parent="Player" node_paths=PackedStringArray("camera", "cursor")]
+script = ExtResource("5_d82b5")
+ray_length = 3.0
+camera = NodePath("../Camera3D")
+cursor = NodePath("../../CanvasLayer/Cursor")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+omni_range = 7.0
+omni_attenuation = 1.19
+
+[connection signal="pressed" from="CanvasLayer/Button" to="Map" method="_on_view_change"]

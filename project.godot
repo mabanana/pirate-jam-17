@@ -14,6 +14,10 @@ config/name="Pirate Jam 17"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Progress="*res://Globals/progression.gd"
+Signals="*res://Globals/signals.gd"
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

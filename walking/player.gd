@@ -3,7 +3,8 @@ extends Node3D
 var player_move_requested = Signals.player_move_requested
 var player_move_resolved = Signals.player_move_resolved
 var player_rotated = Signals.player_rotated
-
+var is_moving = false
+var is_rotating = false
 @export var facing = 2
 
 var facings = [
@@ -23,6 +24,8 @@ func _ready():
 	player_move_resolved.connect(move_tween)
 
 func _input(event):
+	if is_moving or is_rotating:
+		return
 	if event.is_action_pressed("ui_left"):
 		facing -= 1
 		rotate_tween()
@@ -35,18 +38,21 @@ func _input(event):
 		player_move_requested.emit(facings[(facing + 2) % len(facings)])
 
 func rotate_tween():
+	is_rotating = true
 	player_rotated.emit(facing)
 	var tween:= get_tree().create_tween()
 	tween.set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property(self, "transform", Transform3D(facing_basis[facing%len(facings)], position), 0.6)
 	
 	tween.play()
-	return tween.finished
-
+	await tween.finished
+	is_rotating = false
 func move_tween(dest):
+	is_moving = true
 	var tween:= get_tree().create_tween()
 	tween.set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property(self, "position", dest, 0.6)
 	
 	tween.play()
-	return tween.finished
+	await tween.finished
+	is_moving = false

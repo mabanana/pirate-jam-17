@@ -1,5 +1,5 @@
 if {Object} == "Television":
-	Just a televison...
+	Just a [b][color=red]TeLeViSoN[/color][/b]...
 if {Object} == "Drawer":
 	Stinks like drawer
 if {Object} == "Door":

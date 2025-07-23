@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cxa8106lijsns"
+path="res://.godot/imported/noise ambient.wav-4960519af77f5db141492c13022ab20c.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Effects/noise ambient.wav"
+dest_files=["res://.godot/imported/noise ambient.wav-4960519af77f5db141492c13022ab20c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

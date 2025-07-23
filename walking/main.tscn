@@ -117,7 +117,7 @@ skeleton = NodePath("../../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Drawer"]
 shape = SubResource("ConvexPolygonShape3D_qi2kk")
 
-[node name="Television" type="StaticBody3D" parent="Map"]
+[node name="Television" type="StaticBody3D" parent="Map" groups=["TV"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.99364, 1.08956, 3.68412)
 
 [node name="StaticObject3" type="MeshInstance3D" parent="Map/Television"]

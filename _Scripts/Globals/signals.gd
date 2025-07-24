@@ -8,6 +8,8 @@ signal player_move_resolved
 signal player_move_requested
 signal player_rotated
 signal progress_changed
+signal object_inspection_started
+signal object_inspection_stopped
 
 func _ready():
 	object_interacted.connect(_on_object_interacted)
@@ -17,7 +19,8 @@ func _ready():
 	player_move_resolved.connect(_on_player_move_resolved)
 	player_rotated.connect(_on_player_rotated)
 	progress_changed.connect(_on_progress_changed)
-	
+	object_inspection_started.connect(_on_object_inspection_started)
+	object_inspection_stopped.connect(_on_object_inspection_stopped)
 
 func _on_object_interacted(object_name):
 	if OS.is_debug_build():
@@ -46,3 +49,11 @@ func _on_player_rotated(facing):
 func _on_progress_changed(flag_name: String, value: bool):
 	if OS.is_debug_build():
 		print("SignalBus: %s has been set to %s." % [flag_name, value])
+
+func _on_object_inspection_started(object_name: String):
+	if OS.is_debug_build():
+		print("SignalBus: Started inspecting %s" % [object_name])
+
+func _on_object_inspection_stopped(object_name: String):
+	if OS.is_debug_build():
+		print("SignalBus: Stopped inspecting %s" % [object_name])

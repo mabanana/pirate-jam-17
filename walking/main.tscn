@@ -1,11 +1,13 @@
-[gd_scene load_steps=21 format=3 uid="uid://c6wa8pm613ijr"]
+[gd_scene load_steps=25 format=3 uid="uid://c6wa8pm613ijr"]
 
-[ext_resource type="Script" uid="uid://dvwbunjvoehm8" path="res://walking/map.gd" id="1_xur7c"]
+[ext_resource type="Script" uid="uid://dvwbunjvoehm8" path="res://_Scripts/walking/map.gd" id="1_xur7c"]
 [ext_resource type="Shader" uid="uid://7e5flmw6i4si" path="res://walking/floor.gdshader" id="2_pc5u0"]
-[ext_resource type="Script" uid="uid://cxc14apyll1ce" path="res://walking/grid_texture.gd" id="3_g8xml"]
-[ext_resource type="Script" uid="uid://b16ykymto5pu5" path="res://walking/player.gd" id="3_pc5u0"]
-[ext_resource type="Script" uid="uid://hk14xepsjsut" path="res://walking/mouse_controller.gd" id="5_d82b5"]
-[ext_resource type="Script" uid="uid://wpyipogt6464" path="res://walking/cursor.gd" id="6_p73i7"]
+[ext_resource type="Script" uid="uid://cxc14apyll1ce" path="res://_Scripts/walking/grid_texture.gd" id="3_g8xml"]
+[ext_resource type="Script" uid="uid://b16ykymto5pu5" path="res://_Scripts/walking/player.gd" id="3_pc5u0"]
+[ext_resource type="Script" uid="uid://hk14xepsjsut" path="res://_Scripts/walking/mouse_controller.gd" id="5_d82b5"]
+[ext_resource type="Script" uid="uid://3l3pwso0euws" path="res://_Scripts/can_inspect.gd" id="5_qi2kk"]
+[ext_resource type="Script" uid="uid://wpyipogt6464" path="res://_Scripts/walking/cursor.gd" id="6_p73i7"]
+[ext_resource type="Script" uid="uid://cwn5ytterg236" path="res://_Scripts/inspect_system.gd" id="7_1kbht"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p73i7"]
 font_size = 32
@@ -23,6 +25,11 @@ material = SubResource("ShaderMaterial_g8xml")
 size = Vector2(10, 8)
 subdivide_width = 10
 subdivide_depth = 7
+
+[sub_resource type="BoxMesh" id="BoxMesh_tc5xf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v30lp"]
+size = Vector3(1.1239, 0.842773, 0.864212)
 
 [sub_resource type="BoxMesh" id="BoxMesh_p73i7"]
 size = Vector3(0.2, 3, 2)
@@ -97,8 +104,20 @@ mesh = SubResource("PlaneMesh_d82b5")
 skeleton = NodePath("../..")
 script = ExtResource("3_g8xml")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Map"]
+transform = Transform3D(1.00301, 0, 0, 0, 1.00301, 0, 0, 0, 1.00301, 0, 1.40431, 3.5699)
+script = ExtResource("5_qi2kk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/StaticBody3D"]
+transform = Transform3D(0.560285, 0, 0, 0, 0.42143, 0, 0, 0, 0.43196, 0, 0, 0)
+mesh = SubResource("BoxMesh_tc5xf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/StaticBody3D"]
+transform = Transform3D(0.517167, 0, 0, 0, 0.517167, 0, 0, 0, 0.517167, 0.000730334, 0.000762105, 0.00735235)
+shape = SubResource("BoxShape3D_v30lp")
+
 [node name="Door" type="StaticBody3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.5, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.99738, 1.5, -2.00443)
 
 [node name="StaticObject" type="MeshInstance3D" parent="Map/Door"]
 mesh = SubResource("BoxMesh_p73i7")
@@ -148,8 +167,9 @@ size = 8.619
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
 light_energy = 1.808
 
-[node name="Player" type="Node3D" parent="."]
+[node name="Player" type="Node3D" parent="." node_paths=PackedStringArray("inspect_system")]
 script = ExtResource("3_pc5u0")
+inspect_system = NodePath("inspect_system")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2, 0)
@@ -165,15 +185,24 @@ transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 
 mesh = SubResource("PrismMesh_g8xml")
 skeleton = NodePath("../Marker")
 
-[node name="MouseController" type="Node" parent="Player" node_paths=PackedStringArray("camera", "cursor")]
+[node name="MouseController" type="Node" parent="Player" node_paths=PackedStringArray("camera", "cursor", "inspect_system")]
 script = ExtResource("5_d82b5")
 ray_length = 3.0
 camera = NodePath("../Camera3D")
 cursor = NodePath("../../CanvasLayer/Cursor")
+inspect_system = NodePath("../inspect_system")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 omni_range = 7.0
 omni_attenuation = 1.19
+
+[node name="inspect_system" type="Node3D" parent="Player" node_paths=PackedStringArray("inspect_camera", "inspect_position")]
+script = ExtResource("7_1kbht")
+inspect_camera = NodePath("../Camera3D")
+inspect_position = NodePath("Node3D")
+
+[node name="Node3D" type="Node3D" parent="Player/inspect_system"]
+transform = Transform3D(-0.999819, 0, -0.0190229, 0, 1, 0, 0.0190229, 0, -0.999819, -1.16576, 1.94629, 0)
 
 [connection signal="pressed" from="CanvasLayer/Button" to="Map" method="_on_view_change"]

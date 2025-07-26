@@ -1,7 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://hk7gj7gpdd6y"]
+[gd_scene load_steps=10 format=3 uid="uid://hk7gj7gpdd6y"]
 
 [ext_resource type="Script" uid="uid://cckpuxwdipbg8" path="res://Shaders/shader_test_scene.gd" id="1_24rpx"]
+[ext_resource type="Shader" uid="uid://cqdbqn4a1umjm" path="res://Shaders/comp_screen.gdshader" id="2_bcewt"]
 [ext_resource type="Material" uid="uid://c08au4dy3qjt7" path="res://Shaders/highlight_shader.tres" id="2_pgxrm"]
+[ext_resource type="PackedScene" uid="uid://cfjtws4thnlyd" path="res://Computer/computer_screen.tscn" id="3_1emhi"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rxs0l"]
+subdivide_width = 10
+subdivide_depth = 10
+orientation = 2
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_bcewt"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glqcu"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_bcewt")
+shader_parameter/tex = SubResource("ViewportTexture_bcewt")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1emhi"]
 next_pass = ExtResource("2_pgxrm")
@@ -19,6 +35,17 @@ script = ExtResource("1_24rpx")
 omni_range = 8.042
 omni_attenuation = -0.714
 
+[node name="ComputerScreen" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+mesh = SubResource("PlaneMesh_rxs0l")
+skeleton = NodePath("../Camera3D")
+surface_material_override/0 = SubResource("ShaderMaterial_glqcu")
+
 [node name="Shape" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.889922, 0.275587, 0.363442, -0.255131, 0.961276, -0.104195, -0.378083, 0, 0.925772, 0.0116525, 0.00636005, -5.0095)
+visible = false
 mesh = SubResource("TorusMesh_24rpx")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="ComputerScreen" parent="SubViewport" instance=ExtResource("3_1emhi")]

@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c08au4dy3qjt7"]
+
+[ext_resource type="Shader" uid="uid://c7mlf560v1ov5" path="res://Shaders/highlight_shader.gdshader" id="1_5trnr"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_5trnr")
+shader_parameter/shine_color = Color(1, 0.8, 0.3, 1)
+shader_parameter/cycle_interval = 1.0
+shader_parameter/shine_speed = 2.5
+shader_parameter/shine_width = 3.0

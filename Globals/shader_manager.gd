@@ -10,7 +10,7 @@ func connect_signals():
 
 func add_outline(node: Node3D):
 	var mesh_instance
-	for child in node.get_children():
+	for child in [node] + node.get_children():
 		if child is MeshInstance3D:
 			mesh_instance = child 
 			break
@@ -25,7 +25,7 @@ func add_outline(node: Node3D):
 
 func remove_outline(node: Node3D):
 	var mesh_instance
-	for child in node.get_children():
+	for child in [node] + node.get_children():
 		if child is MeshInstance3D:
 			mesh_instance = child
 			break

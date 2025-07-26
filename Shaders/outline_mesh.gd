@@ -9,10 +9,3 @@ func _ready():
 	scale = mesh_instance.scale * 1.1
 	for surface_idx in get_surface_override_material_count():
 		set_surface_override_material(surface_idx, load("res://Shaders/outline_material.tres"))
-	
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	mesh_instance.rotation += Vector3.ONE * delta
-	

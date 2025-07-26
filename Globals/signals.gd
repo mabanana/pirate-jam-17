@@ -23,13 +23,13 @@ func _on_object_interacted(object_name):
 	if OS.is_debug_build():
 		print("SignalBus: Player interacted with %s" % [object_name])
 
-func _on_object_hover_entered(object_name: String):
+func _on_object_hover_entered(object):
 	if OS.is_debug_build():
-		print("SignalBus: Mouse hovered over %s." % object_name)
+		print("SignalBus: Mouse hovered over %s." % object.name)
 
-func _on_object_hover_exited(object_name: String):
+func _on_object_hover_exited(object):
 	if OS.is_debug_build():
-		print("SignalBus: Mouse removed from %s." % [object_name])
+		print("SignalBus: Mouse removed from %s." % [object.name])
 
 func _on_player_move_requested(move_vector: Vector3):
 	if OS.is_debug_build():

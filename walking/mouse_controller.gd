@@ -4,7 +4,13 @@ extends Node
 @export var camera: Camera3D
 @export var cursor: Control
 
-var focus: Node3D
+var focus: Node3D:
+	set(value):
+		if value != focus:
+			if focus:
+				object_hover_exited.emit(focus)
+			focus = value
+			
 
 var object_hover_entered = Signals.object_hover_entered
 var object_hover_exited = Signals.object_hover_exited
@@ -35,8 +41,6 @@ func _process(delta):
 			cursor.cursor.visible = false
 			
 	else:
-		if focus:
-			object_hover_exited.emit(focus)
 		focus = null
 		cursor.label.visible = false
 		cursor.cursor.visible = true

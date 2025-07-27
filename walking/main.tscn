@@ -1,27 +1,20 @@
-[gd_scene load_steps=26 format=3 uid="uid://c6wa8pm613ijr"]
+[gd_scene load_steps=20 format=3 uid="uid://c6wa8pm613ijr"]
 
 [ext_resource type="Script" uid="uid://dvwbunjvoehm8" path="res://walking/map.gd" id="1_xur7c"]
 [ext_resource type="Shader" uid="uid://7e5flmw6i4si" path="res://walking/floor.gdshader" id="2_pc5u0"]
 [ext_resource type="Script" uid="uid://cxc14apyll1ce" path="res://walking/grid_texture.gd" id="3_g8xml"]
-[ext_resource type="Script" uid="uid://b16ykymto5pu5" path="res://walking/player.gd" id="3_pc5u0"]
-[ext_resource type="Script" uid="uid://hk14xepsjsut" path="res://walking/mouse_controller.gd" id="5_d82b5"]
 [ext_resource type="PackedScene" uid="uid://cfjtws4thnlyd" path="res://Computer/computer_screen.tscn" id="5_qi2kk"]
 [ext_resource type="Shader" uid="uid://cqdbqn4a1umjm" path="res://Shaders/comp_screen.gdshader" id="6_1kbht"]
-[ext_resource type="Script" uid="uid://wpyipogt6464" path="res://walking/cursor.gd" id="6_p73i7"]
+[ext_resource type="PackedScene" uid="uid://dlcjb4dvt5sf2" path="res://Room/player.tscn" id="7_qi2kk"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_p73i7"]
-font_size = 32
-shadow_size = 10
-shadow_color = Color(0, 0, 0, 0.584314)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8xml"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p73i7"]
 render_priority = 0
 shader = ExtResource("2_pc5u0")
 shader_parameter/line_width = Vector2(0.05, 0.05)
 shader_parameter/uv_scale = Vector2(5, 4)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_d82b5"]
-material = SubResource("ShaderMaterial_g8xml")
+material = SubResource("ShaderMaterial_p73i7")
 size = Vector2(10, 8)
 subdivide_width = 10
 subdivide_depth = 7
@@ -55,55 +48,16 @@ subdivide_width = 10
 subdivide_depth = 10
 orientation = 2
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_qi2kk"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_p73i7"]
 viewport_path = NodePath("Map/Television/SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1kbht"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("6_1kbht")
-shader_parameter/tex = SubResource("ViewportTexture_qi2kk")
-
-[sub_resource type="BoxMesh" id="BoxMesh_pc5u0"]
-size = Vector3(1, 1.6, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pc5u0"]
-
-[sub_resource type="PrismMesh" id="PrismMesh_g8xml"]
-material = SubResource("StandardMaterial3D_pc5u0")
-size = Vector3(0.2, 0.4, 0.2)
+shader_parameter/tex = SubResource("ViewportTexture_p73i7")
 
 [node name="Main" type="Node3D"]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Cursor" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("label", "cursor")]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("6_p73i7")
-label = NodePath("MouseLabel")
-cursor = NodePath("ColorRect")
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Cursor"]
-layout_mode = 0
-offset_right = 15.0
-offset_bottom = 20.0
-rotation = -0.436332
-
-[node name="MouseLabel" type="Label" parent="CanvasLayer/Cursor"]
-layout_mode = 0
-offset_right = 104.0
-offset_bottom = 45.0
-text = "woooo"
-label_settings = SubResource("LabelSettings_p73i7")
-
-[node name="Button" type="Button" parent="CanvasLayer"]
-custom_minimum_size = Vector2(100, 100)
-offset_right = 8.0
-offset_bottom = 8.0
-text = "Change View"
 
 [node name="Map" type="Node3D" parent="." node_paths=PackedStringArray("floor_plane")]
 script = ExtResource("1_xur7c")
@@ -162,7 +116,7 @@ skeleton = NodePath("../../..")
 [node name="ComputerScreen" parent="Map/Television/SubViewport" instance=ExtResource("5_qi2kk")]
 
 [node name="Screen" type="MeshInstance3D" parent="Map/Television"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.511656, -0.163417)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.000700951, 0.516318, -0.161577)
 mesh = SubResource("PlaneMesh_cpa15")
 surface_material_override/0 = SubResource("ShaderMaterial_1kbht")
 
@@ -172,35 +126,7 @@ projection = 1
 size = 8.619
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -0.796086, 0.605183, 0, -0.605183, -0.796086, 0, 0, 0)
 light_energy = 1.808
 
-[node name="Player" type="Node3D" parent="."]
-script = ExtResource("3_pc5u0")
-
-[node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2, 0)
-current = true
-
-[node name="Marker" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
-mesh = SubResource("BoxMesh_pc5u0")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -0.25, 1.65, 0)
-mesh = SubResource("PrismMesh_g8xml")
-skeleton = NodePath("../Marker")
-
-[node name="MouseController" type="Node" parent="Player" node_paths=PackedStringArray("camera", "cursor")]
-script = ExtResource("5_d82b5")
-ray_length = 3.0
-camera = NodePath("../Camera3D")
-cursor = NodePath("../../CanvasLayer/Cursor")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-omni_range = 7.0
-omni_attenuation = 1.19
-
-[connection signal="pressed" from="CanvasLayer/Button" to="Map" method="_on_view_change"]
+[node name="Player" parent="." instance=ExtResource("7_qi2kk")]

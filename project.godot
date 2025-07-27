@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Pirate Jam 17"
-run/main_scene="uid://c6wa8pm613ijr"
+run/main_scene="uid://dfo5xqgs21tp1"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 

@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5qgfcje44psx"]
+
+[ext_resource type="Script" uid="uid://wpyipogt6464" path="res://walking/cursor.gd" id="1_5yses"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p73i7"]
+font_size = 32
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.584314)
+
+[node name="Cursor" type="Control" node_paths=PackedStringArray("label", "cursor")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("1_5yses")
+label = NodePath("MouseLabel")
+cursor = NodePath("ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 15.0
+offset_bottom = 20.0
+rotation = -0.436332
+mouse_filter = 2
+
+[node name="MouseLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 104.0
+offset_bottom = 45.0
+text = "woooo"
+label_settings = SubResource("LabelSettings_p73i7")

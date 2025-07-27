@@ -48,14 +48,14 @@ subdivide_width = 10
 subdivide_depth = 10
 orientation = 2
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_qi2kk"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_p73i7"]
 viewport_path = NodePath("Map/Television/SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1kbht"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("6_1kbht")
-shader_parameter/tex = SubResource("ViewportTexture_qi2kk")
+shader_parameter/tex = SubResource("ViewportTexture_p73i7")
 
 [node name="Main" type="Node3D"]
 
@@ -116,7 +116,7 @@ skeleton = NodePath("../../..")
 [node name="ComputerScreen" parent="Map/Television/SubViewport" instance=ExtResource("5_qi2kk")]
 
 [node name="Screen" type="MeshInstance3D" parent="Map/Television"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.511656, -0.163417)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.000700951, 0.516318, -0.161577)
 mesh = SubResource("PlaneMesh_cpa15")
 surface_material_override/0 = SubResource("ShaderMaterial_1kbht")
 
@@ -126,7 +126,7 @@ projection = 1
 size = 8.619
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -0.796086, 0.605183, 0, -0.605183, -0.796086, 0, 0, 0)
 light_energy = 1.808
 
 [node name="Player" parent="." instance=ExtResource("7_qi2kk")]

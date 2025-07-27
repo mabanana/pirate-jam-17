@@ -21,6 +21,7 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 <<<<<<<HEADDialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 Progress="*res://Globals/progression.gd"
 Signals="*res://Globals/signals.gd"
+ShaderManager="*res://Globals/shader_manager.gd"
 
 [dialogic]
 

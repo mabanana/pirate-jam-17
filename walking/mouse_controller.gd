@@ -29,14 +29,14 @@ func _process(delta):
 	if result:
 		if result["collider"] != focus:
 			focus = result["collider"]
-			object_hover_entered.emit(focus.name)
+			object_hover_entered.emit(focus)
 			cursor.label.text = focus.name
 			cursor.label.visible = true
 			cursor.cursor.visible = false
 			
 	else:
 		if focus:
-			object_hover_exited.emit(focus.name)
+			object_hover_exited.emit(focus)
 		focus = null
 		cursor.label.visible = false
 		cursor.cursor.visible = true

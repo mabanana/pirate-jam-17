@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfo5xqgs21tp1"]
+
+[ext_resource type="PackedScene" uid="uid://bpnwkjxqnh3k3" path="res://Room/room.tscn" id="1_80nbo"]
+
+[node name="Game" type="Node3D"]
+
+[node name="Room" parent="." instance=ExtResource("1_80nbo")]

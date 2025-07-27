@@ -112,3 +112,4 @@ mesh = SubResource("PlaneMesh_2bgig")
 skeleton = NodePath("../../..")
 
 [node name="Player" parent="." instance=ExtResource("9_2bgig")]
+facing = 4

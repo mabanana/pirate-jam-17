@@ -1,9 +1,30 @@
 extends Node
 # Global Name: Progress
 
+# Prototype
 var door_interacted: bool = false
 var drawer_interacted: bool = false
 var tv_interacted: bool = false
+
+# Day 1
+var coffee_made: bool = false
+var coffee_drank: bool = false
+var medication_interacted: bool = false
+var blood_interacted: bool = false
+var apology_letter_interacted: bool = false
+var files_checked: bool = false
+var august_read: bool = false
+var vince_read: bool = false
+var orlando_read: bool = false
+
+var can_computer: bool = false
+var can_phone: bool = false
+var can_desk: bool = false
+
+# Day 2
+
+# Day 3
+
 
 func _ready():
 	Signals.object_interacted.connect(_on_object_interacted)
@@ -15,14 +36,13 @@ func set_flag(flag_name, value = true):
 	
 	check_progress(flag_name, value)
 
-func check_progress(flag_name, value):
-	if (door_interacted 
-	and drawer_interacted 
-	and tv_interacted 
-	and value
-	and flag_name in ["door_interacted", "drawer_interacted", "tv_interacted"]):
-		if OS.is_debug_build():
-			print("you've interacted with everything")
+func check_progress(flag_name, value):	
+	if august_read and vince_read and orlando_read:
+		files_checked = true
+	if coffee_made:
+		coffee_drank = true
+	if coffee_drank:
+		can_desk = true
 
 func _on_object_interacted(object_name):
 	if object_name == "Television":

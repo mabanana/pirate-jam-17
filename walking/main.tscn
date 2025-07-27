@@ -7,14 +7,14 @@
 [ext_resource type="Shader" uid="uid://cqdbqn4a1umjm" path="res://Shaders/comp_screen.gdshader" id="6_1kbht"]
 [ext_resource type="PackedScene" uid="uid://dlcjb4dvt5sf2" path="res://Room/player.tscn" id="7_qi2kk"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8xml"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p73i7"]
 render_priority = 0
 shader = ExtResource("2_pc5u0")
 shader_parameter/line_width = Vector2(0.05, 0.05)
 shader_parameter/uv_scale = Vector2(5, 4)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_d82b5"]
-material = SubResource("ShaderMaterial_g8xml")
+material = SubResource("ShaderMaterial_p73i7")
 size = Vector2(10, 8)
 subdivide_width = 10
 subdivide_depth = 7

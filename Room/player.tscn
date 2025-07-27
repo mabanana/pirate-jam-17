@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dlcjb4dvt5sf2"]
+[gd_scene load_steps=8 format=3 uid="uid://dlcjb4dvt5sf2"]
 
 [ext_resource type="Script" uid="uid://b16ykymto5pu5" path="res://_Scripts/walking/player.gd" id="1_qyf3p"]
 [ext_resource type="Script" uid="uid://hk14xepsjsut" path="res://_Scripts/walking/mouse_controller.gd" id="2_wj3ed"]
 [ext_resource type="PackedScene" uid="uid://c5qgfcje44psx" path="res://Room/cursor.tscn" id="3_wj3ed"]
+[ext_resource type="Script" uid="uid://cwn5ytterg236" path="res://_Scripts/inspect_system.gd" id="4_oqwds"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pc5u0"]
 size = Vector3(1, 1.6, 1)
@@ -13,9 +14,8 @@ size = Vector3(1, 1.6, 1)
 material = SubResource("StandardMaterial3D_pc5u0")
 size = Vector3(0.2, 0.4, 0.2)
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("inspect_system")]
+[node name="Player" type="Node3D"]
 script = ExtResource("1_qyf3p")
-inspect_system = NodePath("")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.4, 0)
@@ -33,11 +33,12 @@ visible = false
 mesh = SubResource("PrismMesh_g8xml")
 skeleton = NodePath("../Marker")
 
-[node name="MouseController" type="Node" parent="." node_paths=PackedStringArray("camera", "cursor")]
+[node name="MouseController" type="Node" parent="." node_paths=PackedStringArray("camera", "cursor", "inspect_system")]
 script = ExtResource("2_wj3ed")
 ray_length = 3.0
 camera = NodePath("../Camera3D")
 cursor = NodePath("../CanvasLayer/Cursor")
+inspect_system = NodePath("../inspect_system")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -48,3 +49,11 @@ omni_attenuation = 1.19
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Cursor" parent="CanvasLayer" instance=ExtResource("3_wj3ed")]
+
+[node name="inspect_system" type="Node3D" parent="." node_paths=PackedStringArray("inspect_camera", "inspect_position")]
+script = ExtResource("4_oqwds")
+inspect_camera = NodePath("")
+inspect_position = NodePath("Node3D")
+
+[node name="Node3D" type="Node3D" parent="inspect_system"]
+transform = Transform3D(-0.999819, 0, -0.0190229, 0, 1, 0, 0.0190229, 0, -0.999819, -1.16576, 1.94629, 0)

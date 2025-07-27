@@ -12,6 +12,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 script = ExtResource("1_5yses")
 label = NodePath("MouseLabel")
 cursor = NodePath("ColorRect")
@@ -21,6 +22,7 @@ layout_mode = 0
 offset_right = 15.0
 offset_bottom = 20.0
 rotation = -0.436332
+mouse_filter = 2
 
 [node name="MouseLabel" type="Label" parent="."]
 layout_mode = 0

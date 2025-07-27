@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dlcjb4dvt5sf2"]
 
-[ext_resource type="Script" uid="uid://b16ykymto5pu5" path="res://walking/player.gd" id="1_qyf3p"]
-[ext_resource type="Script" uid="uid://hk14xepsjsut" path="res://walking/mouse_controller.gd" id="2_wj3ed"]
+[ext_resource type="Script" uid="uid://b16ykymto5pu5" path="res://_Scripts/walking/player.gd" id="1_qyf3p"]
+[ext_resource type="Script" uid="uid://hk14xepsjsut" path="res://_Scripts/walking/mouse_controller.gd" id="2_wj3ed"]
 [ext_resource type="PackedScene" uid="uid://c5qgfcje44psx" path="res://Room/cursor.tscn" id="3_wj3ed"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pc5u0"]
@@ -13,8 +13,9 @@ size = Vector3(1, 1.6, 1)
 material = SubResource("StandardMaterial3D_pc5u0")
 size = Vector3(0.2, 0.4, 0.2)
 
-[node name="Player" type="Node3D"]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("inspect_system")]
 script = ExtResource("1_qyf3p")
+inspect_system = NodePath("")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.4, 0)

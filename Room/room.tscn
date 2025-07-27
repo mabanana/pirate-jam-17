@@ -1,6 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://bpnwkjxqnh3k3"]
+[gd_scene load_steps=31 format=3 uid="uid://bpnwkjxqnh3k3"]
 
 [ext_resource type="ArrayMesh" uid="uid://bnv514k6t6s31" path="res://Assets/3D Models/Desk/Desk Game Res.obj" id="1_i7vs8"]
+[ext_resource type="Script" uid="uid://cwn5ytterg236" path="res://_Scripts/inspect_system.gd" id="2_8um3o"]
 [ext_resource type="ArrayMesh" uid="uid://dcjtsrgsent24" path="res://Assets/3D Models/Cardboard Box/Cardboard Box Game Res.obj" id="2_x07kc"]
 [ext_resource type="ArrayMesh" uid="uid://q62x1uegjypk" path="res://Assets/3D Models/Mattress/Mattress Game Res.obj" id="3_fpb7c"]
 [ext_resource type="Texture2D" uid="uid://b5nfesbk6cm0s" path="res://Assets/3D Models/Mattress/Texture Maps/Mattress Base Color.png" id="4_hjiva"]
@@ -91,6 +92,13 @@ shader_parameter/tex = SubResource("ViewportTexture_d2jpr")
 
 [node name="Room" type="Node3D"]
 
+[node name="Player" parent="." node_paths=PackedStringArray("inspect_system") instance=ExtResource("9_2bgig")]
+facing = 4
+inspect_system = NodePath("../InspectSystem")
+
+[node name="InspectSystem" type="Node3D" parent="."]
+script = ExtResource("2_8um3o")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8um3o")
 
@@ -152,9 +160,6 @@ skeleton = NodePath("../../..")
 [node name="Room" type="MeshInstance3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 mesh = SubResource("BoxMesh_2bgig")
-
-[node name="Player" parent="." instance=ExtResource("9_2bgig")]
-facing = 4
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.116777, 2.82369, -1.42045)

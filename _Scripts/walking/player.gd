@@ -50,5 +50,4 @@ func move_tween(dest):
 	tween.set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property(self, "position", dest, 0.6)
 	tween.play()
-	await tween.finished
 	is_moving = false

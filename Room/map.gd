@@ -28,6 +28,8 @@ func _ready():
 			grid_map.erase(object_grid_pos)
 	player_move_requested.connect(_move_player)
 	$"../Player".position = grid_map[grid_pos]
+	# Add bathroom grid pos
+	grid_map[[-1, 0]] = Vector3(-4.5, 0, -2)
 
 
 func _move_player(dir):

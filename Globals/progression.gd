@@ -36,7 +36,7 @@ func set_flag(flag_name, value = true):
 	
 	check_progress(flag_name, value)
 
-func check_progress(flag_name, value):	
+func check_progress(flag_name, value):
 	if august_read and vince_read and orlando_read:
 		files_checked = true
 	if coffee_made:
@@ -44,10 +44,25 @@ func check_progress(flag_name, value):
 	if coffee_drank:
 		can_desk = true
 
-func _on_object_interacted(object_name):
-	if object_name == "Television":
-		set_flag("tv_interacted", true)
-	elif object_name == "Drawer":
-		set_flag("drawer_interacted", true)
-	elif object_name == "Door":
-		set_flag("door_interacted", true)
+func _on_object_interacted(object):
+	match object.name:
+		"Television":
+			set_flag("tv_interacted", true)
+		"Drawer":
+			set_flag("drawer_interacted", true)
+		"Door":
+			set_flag("door_interacted", true)
+		"Medication":
+			set_flag("medication_interacted", true)
+		"InstantCoffee":
+			set_flag("coffee_made", true)
+		"LukewarmCoffee":
+			set_flag("coffee_drank", true)
+		"Blood":
+			set_flag("blood_interacted", true)
+		"LetterOfApology":
+			set_flag("apology_letter_interacted", true)
+		
+	Dialogic.VAR.Object = str(object.name)
+	Dialogic.start("exploration")
+	

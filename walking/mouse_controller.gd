@@ -48,6 +48,4 @@ func _process(delta):
 func _input(event):
 	if (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
 		if focus:
-			Signals.object_interacted.emit(focus.name)
-			Dialogic.VAR.Object = str(focus.name)
-			Dialogic.start("test_timeline")
+			Signals.object_interacted.emit(focus)

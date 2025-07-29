@@ -1,0 +1,15 @@
+if {Object} == "Medication":
+	H\: Hm. Medication is always the answer, right doc...? Pfft. A bandaid, if you ask me. You want to fix me? You fix the cause.
+	do Signals.emit("Medication")
+elif {Object} == "Blood":
+	H\: What the—? Did I do this? Keep having nosebleeds when I’m half asleep. Can barely fucking remember having them.
+	do Signals.emit("Blood")
+elif {Object} == "LetterOfApology":
+	H\: Hm. Never got around to sending this. Hope she knows I’m sorry for what I did. Just want to make things right... I’ll find them, Angelie. I promise.
+	do Signals.emit("LetterOfApology")
+elif {Object} == "Phone":
+	I’m ready to make a call.
+	do Signals.emit("Phone")
+elif {Object} == "Door":
+	I can't leave yet
+	do Signals.emit("Door")

@@ -9,6 +9,9 @@ signal player_move_requested
 signal player_rotated
 signal progress_changed
 
+func emit(signal_name, args):
+	emit_signal(signal_name, args)
+
 func _ready():
 	object_interacted.connect(_on_object_interacted)
 	object_hover_entered.connect(_on_object_hover_entered)

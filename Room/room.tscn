@@ -277,7 +277,7 @@ skeleton = NodePath("../../..")
 shape = SubResource("CylinderShape3D_8um3o")
 
 [node name="Blood" type="StaticBody3D" parent="Objects"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18718, 0.216651, 2.23386)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.26711, 0.216651, 2.06369)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/Blood"]
 mesh = SubResource("BoxMesh_d2jpr")

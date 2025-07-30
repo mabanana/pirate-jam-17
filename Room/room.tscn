@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bpnwkjxqnh3k3"]
+[gd_scene load_steps=42 format=3 uid="uid://bpnwkjxqnh3k3"]
 
 [ext_resource type="ArrayMesh" uid="uid://bnv514k6t6s31" path="res://Assets/3D Models/Desk/Desk Game Res.obj" id="1_i7vs8"]
 [ext_resource type="ArrayMesh" uid="uid://dcjtsrgsent24" path="res://Assets/3D Models/Cardboard Box/Cardboard Box Game Res.obj" id="2_x07kc"]
@@ -76,6 +76,35 @@ height = 0.2
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_8um3o"]
 height = 0.2
 radius = 0.05
+
+[sub_resource type="BoxMesh" id="BoxMesh_d2jpr"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8um3o"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="GDScript" id="GDScript_ka5ae"]
+script/source = "extends StaticBody3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	Signals.object_interacted.connect(func(object):
+		if object.name == \"InstantCoffee\":
+			name = \"LukewarmCoffee\"
+			var pos = position
+			position.y = 100
+			await get_tree().create_timer(0.5).timeout
+			position = pos
+		elif object.name == \"LukewarmCoffee\":
+			position.y = 100
+		)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d2jpr"]
 render_priority = 0
@@ -221,12 +250,31 @@ skeleton = NodePath("../../..")
 shape = SubResource("CylinderShape3D_8um3o")
 
 [node name="Blood" type="StaticBody3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77506, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/Blood"]
+mesh = SubResource("BoxMesh_d2jpr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/Blood"]
+shape = SubResource("BoxShape3D_8um3o")
 
 [node name="LetterOfApology" type="StaticBody3D" parent="Objects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.823515, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/LetterOfApology"]
+mesh = SubResource("BoxMesh_d2jpr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/LetterOfApology"]
+shape = SubResource("BoxShape3D_8um3o")
 
 [node name="InstantCoffee" type="StaticBody3D" parent="Objects"]
+script = SubResource("GDScript_ka5ae")
 
-[node name="LukewarmCoffee" type="StaticBody3D" parent="Objects"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/InstantCoffee"]
+mesh = SubResource("BoxMesh_d2jpr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/InstantCoffee"]
+shape = SubResource("BoxShape3D_8um3o")
 
 [node name="Map" type="Node3D" parent="." node_paths=PackedStringArray("floor_plane")]
 script = ExtResource("8_hjiva")

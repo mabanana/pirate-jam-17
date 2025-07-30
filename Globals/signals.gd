@@ -20,7 +20,6 @@ func _ready():
 	player_move_resolved.connect(_on_player_move_resolved)
 	player_rotated.connect(_on_player_rotated)
 	progress_changed.connect(_on_progress_changed)
-	
 
 func _on_object_interacted(object_name):
 	if OS.is_debug_build():

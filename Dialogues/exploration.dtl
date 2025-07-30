@@ -1,15 +1,23 @@
 if {Object} == "Medication":
 	H\: Hm. Medication is always the answer, right doc...? Pfft. A bandaid, if you ask me. You want to fix me? You fix the cause.
-	do Signals.emit("Medication")
 elif {Object} == "Blood":
 	H\: What the—? Did I do this? Keep having nosebleeds when I’m half asleep. Can barely fucking remember having them.
-	do Signals.emit("Blood")
 elif {Object} == "LetterOfApology":
 	H\: Hm. Never got around to sending this. Hope she knows I’m sorry for what I did. Just want to make things right... I’ll find them, Angelie. I promise.
-	do Signals.emit("LetterOfApology")
 elif {Object} == "Phone":
 	I’m ready to make a call.
-	do Signals.emit("Phone")
 elif {Object} == "Door":
 	I can't leave yet
-	do Signals.emit("Door")
+elif {Object} == "ComputerDesk":
+	if Progress.can_desk == false:
+		My head’s still pounding. I need a coffee before I get to work.
+elif {Object} == "Files":
+	if Progress.can_file == true:
+		Okay. Let’s check these out.
+		Everyone I suspect should be clearly labelled. Each file should have a piece of potential evidence I sourced from... Guh. I can’t remember... the station? No... that can’t be right...
+elif {Object} == "Phone":
+	if Progress.can_phone == false:
+		I’m not ready to make any calls yet. I should check out each suspect’s file.
+elif {Object} == "Computer":
+	if Progress.can_computer == false:
+		I’m not ready to do any research yet. I should check out each suspect’s file.

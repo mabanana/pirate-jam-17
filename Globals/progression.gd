@@ -30,15 +30,20 @@ func _ready():
 	Signals.object_interacted.connect(_on_object_interacted)
 
 func set_flag(flag_name, value = true):
+	var value_changed = false
 	if value != get(flag_name):
 		Signals.progress_changed.emit(flag_name, value)
+		value_changed = true
 	set(flag_name, value)
 	
 	check_progress(flag_name, value)
+	return value_changed
 
 func check_progress(flag_name, value):
 	if august_read and vince_read and orlando_read:
 		files_checked = true
+		can_computer = true
+		can_phone = true
 	if coffee_made:
 		coffee_drank = true
 	if coffee_drank:
@@ -62,6 +67,12 @@ func _on_object_interacted(object):
 			set_flag("blood_interacted", true)
 		"LetterOfApology":
 			set_flag("apology_letter_interacted", true)
+		"ComputerDesk":
+			set_flag("ComputerDesk", true)
+		"Computer":
+			set_flag("Computer", true)
+		"Phonebook":
+			set_flag("Phonebook", true)
 		
 	Dialogic.VAR.Object = str(object.name)
 	Dialogic.start("exploration")

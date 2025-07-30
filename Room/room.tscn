@@ -226,7 +226,7 @@ mesh = ExtResource("7_d2jpr")
 skeleton = NodePath("../../..")
 
 [node name="ComputerDesk" type="StaticBody3D" parent="Objects"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.899231, 0, -3.12601)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.899231, 0, -3.2479)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/ComputerDesk"]
 shape = SubResource("ConcavePolygonShape3D_ka5ae")
@@ -257,7 +257,7 @@ skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("ORMMaterial3D_gvnox")
 
 [node name="Medication" type="StaticBody3D" parent="Objects"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.35407, 1.74759, -0.414469)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.35407, 1.47348, -3.17884)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/Medication"]
 mesh = SubResource("CylinderMesh_d2jpr")
@@ -267,7 +267,7 @@ skeleton = NodePath("../../..")
 shape = SubResource("CylinderShape3D_8um3o")
 
 [node name="Blood" type="StaticBody3D" parent="Objects"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425948, 0.216651, 1.83578)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18718, 0.216651, 2.23386)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/Blood"]
 mesh = SubResource("BoxMesh_d2jpr")

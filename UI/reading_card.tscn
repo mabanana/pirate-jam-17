@@ -33,9 +33,12 @@ layout_mode = 2
 theme_override_constants/separation = 15
 
 [node name="Head" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 3
+text = "AUGUSTFILE"
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -43,6 +46,10 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 
 [node name="Body" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
+text = "August Williams. Angelie’s girlfriend. I remember reading 99% of murders are committed by the victim’s girlfriend online somewhere... I think that’s the right stat."
+autowrap_mode = 3

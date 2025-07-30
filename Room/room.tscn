@@ -1,6 +1,7 @@
-[gd_scene load_steps=46 format=3 uid="uid://bpnwkjxqnh3k3"]
+[gd_scene load_steps=47 format=3 uid="uid://bpnwkjxqnh3k3"]
 
 [ext_resource type="ArrayMesh" uid="uid://bnv514k6t6s31" path="res://Assets/3D Models/Desk/Desk Game Res.obj" id="1_i7vs8"]
+[ext_resource type="Script" uid="uid://788olr5sdccm" path="res://UI/reading_controller.gd" id="2_44dum"]
 [ext_resource type="ArrayMesh" uid="uid://dcjtsrgsent24" path="res://Assets/3D Models/Cardboard Box/Cardboard Box Game Res.obj" id="2_x07kc"]
 [ext_resource type="ArrayMesh" uid="uid://q62x1uegjypk" path="res://Assets/3D Models/Mattress/Mattress Game Res.obj" id="3_fpb7c"]
 [ext_resource type="Texture2D" uid="uid://b5nfesbk6cm0s" path="res://Assets/3D Models/Mattress/Texture Maps/Mattress Base Color.png" id="4_hjiva"]
@@ -176,6 +177,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="ReadingController" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_44dum")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8um3o")

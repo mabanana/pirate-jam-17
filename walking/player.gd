@@ -3,6 +3,7 @@ extends Node3D
 var player_move_requested = Signals.player_move_requested
 var player_move_resolved = Signals.player_move_resolved
 var player_rotated = Signals.player_rotated
+
 var is_moving = false
 var is_rotating = false
 @export var facing = 2
@@ -24,7 +25,7 @@ func _ready():
 	player_move_resolved.connect(move_tween)
 
 func _input(event):
-	if is_moving or is_rotating:
+	if is_moving or is_rotating or Dialogic.current_timeline:
 		return
 	if event.is_action_pressed("ui_left"):
 		facing -= 1
@@ -47,6 +48,7 @@ func rotate_tween():
 	tween.play()
 	await tween.finished
 	is_rotating = false
+
 func move_tween(dest):
 	is_moving = true
 	var tween:= get_tree().create_tween()

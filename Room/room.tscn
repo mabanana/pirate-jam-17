@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bpnwkjxqnh3k3"]
+[gd_scene load_steps=46 format=3 uid="uid://bpnwkjxqnh3k3"]
 
 [ext_resource type="ArrayMesh" uid="uid://bnv514k6t6s31" path="res://Assets/3D Models/Desk/Desk Game Res.obj" id="1_i7vs8"]
 [ext_resource type="ArrayMesh" uid="uid://dcjtsrgsent24" path="res://Assets/3D Models/Cardboard Box/Cardboard Box Game Res.obj" id="2_x07kc"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://cfjtws4thnlyd" path="res://Computer/computer_screen.tscn" id="11_d2jpr"]
 [ext_resource type="Shader" uid="uid://cqdbqn4a1umjm" path="res://Shaders/comp_screen.gdshader" id="12_8um3o"]
 [ext_resource type="Shader" uid="uid://w3snj3mplxg" path="res://Shaders/grain_effect.gdshader" id="13_8um3o"]
+[ext_resource type="Script" uid="uid://c3umrowhu3bei" path="res://Room/audio_controller.gd" id="14_ka5ae"]
+[ext_resource type="AudioStream" uid="uid://67i81unar7u8" path="res://Assets/Audio/Effects/new day trigger.wav" id="15_3o5qk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ka5ae"]
 shader = ExtResource("13_8um3o")
@@ -419,3 +421,17 @@ light_indirect_energy = 1.162
 light_bake_mode = 1
 omni_range = 1.418
 omni_attenuation = 0.555
+
+[node name="AudioController" type="Node" parent="." node_paths=PackedStringArray("music_player", "sfx_player", "notif_player")]
+script = ExtResource("14_ka5ae")
+music_player = NodePath("Music")
+sfx_player = NodePath("Sfx")
+notif_player = NodePath("Notif")
+
+[node name="Music" type="AudioStreamPlayer" parent="AudioController"]
+stream = ExtResource("15_3o5qk")
+autoplay = true
+
+[node name="Notif" type="AudioStreamPlayer" parent="AudioController"]
+
+[node name="Sfx" type="AudioStreamPlayer3D" parent="AudioController"]

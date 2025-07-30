@@ -40,14 +40,15 @@ func set_flag(flag_name, value = true):
 	return value_changed
 
 func check_progress(flag_name, value):
-	if august_read and vince_read and orlando_read:
+	if august_read and vince_read and orlando_read and flag_name in ["august_read", "vince_read", "orlando_read"] and value:
 		files_checked = true
 		can_computer = true
 		can_phone = true
-	if coffee_made:
+	if "coffee_made" == flag_name and value:
 		coffee_drank = true
-	if coffee_drank:
+	if flag_name == "coffee_drank" and value:
 		can_desk = true
+		Signals.music_change_started.emit(AudioController.Audio.SMOKE_AND_MIRRORS_3)
 
 func _on_object_interacted(object):
 	match object.name:
@@ -68,9 +69,12 @@ func _on_object_interacted(object):
 		"LetterOfApology":
 			set_flag("apology_letter_interacted", true)
 		"ComputerDesk":
-			set_flag("ComputerDesk", true)
+			if can_desk:
+				set_flag("ComputerDesk", true)
+				Signals.music_change_started.emit(AudioController.Audio.PYRAMIDS_V9)
 		"Computer":
-			set_flag("Computer", true)
+			if can_computer:
+				set_flag("Computer", true)
 		"Phonebook":
 			set_flag("Phonebook", true)
 		

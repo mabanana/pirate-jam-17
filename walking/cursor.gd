@@ -5,7 +5,8 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	Dialogic.timeline_started.connect(hide)
+	Dialogic.timeline_ended.connect(show)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

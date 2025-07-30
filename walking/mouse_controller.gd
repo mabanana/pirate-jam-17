@@ -32,7 +32,7 @@ func _process(delta):
 
 	var result = space_state.intersect_ray(query)
 	
-	if result:
+	if result and !Dialogic.current_timeline:
 		if result["collider"] != focus:
 			focus = result["collider"]
 			object_hover_entered.emit(focus)

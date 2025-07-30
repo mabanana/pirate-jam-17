@@ -9,7 +9,36 @@ elif {Object} == "Phone":
 elif {Object} == "Door":
 	I can't leave yet
 elif {Object} == "ComputerDesk":
-	if Progress.can_desk == false:
+	if Progress.can_desk == true:
+		Everyone I suspect should be clearly labelled. Each file should have a piece of potential evidence I sourced from... Guh. I can’t remember... the station? No... that can’t be right...
+		label Files
+		- August
+			label AugustFiles
+			- August's File
+				August Williams. Angelie’s girlfriend. I remember reading 99% of murders are committed by the victim’s girlfriend online somewhere... I think that’s the right stat.
+				do Signals.emit("reading_started", "AUG_1")
+			- August-Angelie Transcript | [=""]
+				Oh yeah. This is the transcript of August’s last call with Angelie. Three days before the murder... Can’t remember how I got this either...
+				do Signals.emit("reading_started", "AUG_ANG_TRANSCRIPT")
+			Hm. A few things stand out. The computer’s still hooked up to the RCPD’s surveillance and information database. I should search for something, or maybe look at another file.
+		- Vincent
+			label VincentFiles
+			- Vincent's File
+				<Empty Text Event>
+				do Signals.emit("reading_started", "VIN_1")
+			- Dismissal - Vincent
+				do Signals.emit("reading_started", "VIN_DISMISSAL")
+		- Orlando
+			label OrlandoFiles
+			- Orlando's File
+				do Signals.emit("reading_started", "ORL_1")
+			- Orlando's Record
+				do Signals.emit("reading_started", "ORL_RECORD")
+		[wait time="0.2"]
+		- Read another File
+			jump Files
+		- Maybe Later
+	else:
 		My head’s still pounding. I need a coffee before I get to work.
 elif {Object} == "Files":
 	if Progress.can_file == true:
@@ -21,3 +50,13 @@ elif {Object} == "Phone":
 elif {Object} == "Computer":
 	if Progress.can_computer == false:
 		I’m not ready to do any research yet. I should check out each suspect’s file.
+elif {Object} == "LukewarmCoffee":
+	That’s it. That’s the stuff. Feels like the only time I feel normal’s after a cup of coffee... Let’s get to work.
+elif {Object} == "Phone":
+	if Progress.can_phone == true:
+		I’m ready to make a call.
+		- Call Orlando
+		- Call Vincent
+		- Call August
+	else:
+		I’m not ready to make a call yet.

@@ -10,6 +10,7 @@ signal player_rotated
 signal progress_changed
 signal music_change_started
 signal sfx_started
+signal reading_started
 
 func emit(signal_name, args):
 	emit_signal(signal_name, args)

@@ -17,10 +17,16 @@ enum Read {
 	HAR_FULL_DISMISSAL,
 	OR_COMP,
 	WARDEN_RECC,
-	
 }
 
-func start_read(read: Read):
+func _ready():
+	Signals.reading_started.connect(start_read)
+
+func start_read(read_string: String):
+	var read: Read
+	if read_string.to_upper() in Read.keys():
+		read = Read.keys().find(read_string.to_upper())
+	print("Started reading %s" % Read.keys()[read])
 	pass
 
 func end_read():

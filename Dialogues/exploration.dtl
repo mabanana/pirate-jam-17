@@ -38,7 +38,10 @@ elif {Object} == "ComputerDesk":
 				Orlando Martin. Ex-con. One of the guys Angelie and I put away. Couldn’t believe how weak his sentence was after he was found guilty... what did he do again?
 				do Signals.emit("reading_started", "ORL_1")
 			- Orlando's Record
+				Oh yeah. I remember finding that weird, her visiting him at RC Penitentiary. Said she could ‘save him’. I know they started recording all visitations. There might be something on his behavioural record.
 				do Signals.emit("reading_started", "ORL_RECORD")
+			I should look up those file names on my computer. It’s still hooked up to the RCPD’s surveillance and information database. Maybe I’ll find something in the transcripts. I could also check out the other files.
+			Orlando Martin. I could take a look at his file and record again.
 		[wait time="0.2"]
 		- Read another File
 			jump Files

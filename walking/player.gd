@@ -27,15 +27,15 @@ func _ready():
 func _input(event):
 	if is_moving or is_rotating or Dialogic.current_timeline:
 		return
-	if event.is_action_pressed("ui_left"):
+	if event.is_action_pressed("left"):
 		facing -= 1
 		rotate_tween()
-	elif event.is_action_pressed("ui_right"):
+	elif event.is_action_pressed("rgt"):
 		facing += 1
 		rotate_tween()
-	elif event.is_action_pressed("ui_up"):
+	elif event.is_action_pressed("fwd"):
 		player_move_requested.emit(facings[facing % len(facings)])
-	elif event.is_action_pressed("ui_down"):
+	elif event.is_action_pressed("bk"):
 		player_move_requested.emit(facings[(facing + 2) % len(facings)])
 
 func rotate_tween():

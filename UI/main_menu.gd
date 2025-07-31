@@ -12,7 +12,9 @@ func _ready():
 	$VBoxContainer/Quit.pressed.connect(func():
 		get_tree().quit())
 	$VBoxContainer/Resume.pressed.connect(func():
-		hide())
+		hide()
+		Signals.in_menu = false
+		Signals.game_unpaused.emit())
 	$VBoxContainer/Return.pressed.connect(func():
 		game.game.queue_free())
 

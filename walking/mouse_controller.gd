@@ -23,8 +23,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if inspect_system and inspect_system.is_currently_inspecting():
-		return
 	var space_state = camera.get_world_3d().direct_space_state
 	var mousepos = camera.get_viewport().get_mouse_position()
 
@@ -35,7 +33,7 @@ func _process(delta):
 
 	var result = space_state.intersect_ray(query)
 	
-	if result and !Dialogic.current_timeline and !inspect_system.is_currently_inspecting():
+	if result and !Dialogic.current_timeline and !inspect_system.is_currently_inspecting() and !Signals.in_menu:
 		if result["collider"] != focus:
 			focus = result["collider"]
 			object_hover_entered.emit(focus)

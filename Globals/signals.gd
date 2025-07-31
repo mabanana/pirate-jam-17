@@ -1,5 +1,6 @@
 extends Node
 # Global Name: Signals
+var in_menu = false
 
 signal object_interacted
 signal object_hover_entered
@@ -13,6 +14,9 @@ signal sfx_started
 signal reading_started
 signal object_inspection_started
 signal object_inspection_stopped
+signal game_paused
+signal game_unpaused
+
 
 func emit(signal_name, args):
 	emit_signal(signal_name, args)

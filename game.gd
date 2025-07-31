@@ -19,6 +19,11 @@ func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		if game:
 			main_menu.visible = !main_menu.visible
+			Signals.in_menu = main_menu.visible
+			if main_menu.visible:
+				Signals.game_paused.emit()
+			else:
+				Signals.game_unpaused.emit()
 
 func start_game():
 	game = load("res://Room/room.tscn").instantiate()

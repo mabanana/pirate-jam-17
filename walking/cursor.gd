@@ -13,6 +13,8 @@ func _ready():
 		elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		)
+	Signals.game_paused.connect(show)
+	Signals.game_unpaused.connect(hide)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

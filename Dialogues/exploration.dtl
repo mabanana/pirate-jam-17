@@ -1,0 +1,70 @@
+if {Object} == "Medication":
+	H\: Hm. Medication is always the answer, right doc...? Pfft. A bandaid, if you ask me. You want to fix me? You fix the cause.
+elif {Object} == "Blood":
+	H\: What the—? Did I do this? Keep having nosebleeds when I’m half asleep. Can barely fucking remember having them.
+elif {Object} == "LetterOfApology":
+	H\: Hm. Never got around to sending this. Hope she knows I’m sorry for what I did. Just want to make things right... I’ll find them, Angelie. I promise.
+elif {Object} == "Phone":
+	I’m ready to make a call.
+elif {Object} == "Door":
+	I can't leave yet
+elif {Object} == "ComputerDesk":
+	if Progress.can_desk == true:
+		Everyone I suspect should be clearly labelled. Each file should have a piece of potential evidence I sourced from... Guh. I can’t remember... the station? No... that can’t be right...
+		label Files
+		- August
+			label AugustFiles
+			- August's File
+				August Williams. Angelie’s girlfriend. I remember reading 99% of murders are committed by the victim’s girlfriend online somewhere... I think that’s the right stat.
+				do Signals.emit("reading_started", "AUG_1")
+			- August-Angelie Transcript | [=""]
+				Oh yeah. This is the transcript of August’s last call with Angelie. Three days before the murder... Can’t remember how I got this either...
+				do Signals.emit("reading_started", "AUG_ANG_TRANSCRIPT")
+			Hm. A few things stand out. The computer’s still hooked up to the RCPD’s surveillance and information database. I should search for something, or maybe look at another file.
+			August Williams. Let me look at her file and that transcript again.
+		- Vincent
+			label VincentFiles
+			- Vincent's File
+				Vincent O’Brien. Angelie and I’s ol’ supervisor. A real cunt. I remember the tone he spoke to me when he dismissed me. Like I was some child... What goes around, eh?
+				do Signals.emit("reading_started", "VIN_1")
+			- Dismissal - Vincent
+				I got the case summary of his termination here as well... Look at that. Exactly 12 years after I was dismissed. No such thing as a coincidence.
+				do Signals.emit("reading_started", "VIN_DISMISSAL")
+			Pretty short. Might find more if I input the file number into the computer. It’s still hooked up to the RCPD’s surveillance and information database. Or, I could look at another file.
+			Vince O’Brien. I can read his file and case summary again.
+		- Orlando
+			label OrlandoFiles
+			- Orlando's File
+				Orlando Martin. Ex-con. One of the guys Angelie and I put away. Couldn’t believe how weak his sentence was after he was found guilty... what did he do again?
+				do Signals.emit("reading_started", "ORL_1")
+			- Orlando's Record
+				Oh yeah. I remember finding that weird, her visiting him at RC Penitentiary. Said she could ‘save him’. I know they started recording all visitations. There might be something on his behavioural record.
+				do Signals.emit("reading_started", "ORL_RECORD")
+			I should look up those file names on my computer. It’s still hooked up to the RCPD’s surveillance and information database. Maybe I’ll find something in the transcripts. I could also check out the other files.
+			Orlando Martin. I could take a look at his file and record again.
+		[wait time="0.2"]
+		- Read another File
+			jump Files
+		- Maybe Later
+	else:
+		My head’s still pounding. I need a coffee before I get to work.
+elif {Object} == "Files":
+	if Progress.can_file == true:
+		Okay. Let’s check these out.
+		Everyone I suspect should be clearly labelled. Each file should have a piece of potential evidence I sourced from... Guh. I can’t remember... the station? No... that can’t be right...
+elif {Object} == "Phone":
+	if Progress.can_phone == false:
+		I’m not ready to make any calls yet. I should check out each suspect’s file.
+elif {Object} == "Computer":
+	if Progress.can_computer == false:
+		I’m not ready to do any research yet. I should check out each suspect’s file.
+elif {Object} == "LukewarmCoffee":
+	That’s it. That’s the stuff. Feels like the only time I feel normal’s after a cup of coffee... Let’s get to work.
+elif {Object} == "Phone":
+	if Progress.can_phone == true:
+		I’m ready to make a call.
+		- Call Orlando
+		- Call Vincent
+		- Call August
+	else:
+		I’m not ready to make a call yet.

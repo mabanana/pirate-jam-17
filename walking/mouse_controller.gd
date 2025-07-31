@@ -3,6 +3,7 @@ extends Node
 @export var ray_length = 1.2
 @export var camera: Camera3D
 @export var cursor: Control
+@export var inspect_system: Node3D
 
 var focus: Node3D:
 	set(value):
@@ -32,7 +33,7 @@ func _process(delta):
 
 	var result = space_state.intersect_ray(query)
 	
-	if result:
+	if result and !Dialogic.current_timeline and !inspect_system.is_currently_inspecting() and !Signals.in_menu:
 		if result["collider"] != focus:
 			focus = result["collider"]
 			object_hover_entered.emit(focus)
@@ -48,6 +49,6 @@ func _process(delta):
 func _input(event):
 	if (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
 		if focus:
-			Signals.object_interacted.emit(focus.name)
-			Dialogic.VAR.Object = str(focus.name)
-			Dialogic.start("test_timeline")
+			Signals.object_interacted.emit(focus)
+			if (inspect_system and inspect_system.try_inspect_object(focus.name)):
+				Signals.object_inspection_started.emit()

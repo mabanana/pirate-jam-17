@@ -10,7 +10,7 @@ func _ready():
 	Dialogic.state_changed.connect(func(state):
 		if state == Dialogic.States.AWAITING_CHOICE:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
+		elif Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		)
 

@@ -11,6 +11,8 @@ signal progress_changed
 signal music_change_started
 signal sfx_started
 signal reading_started
+signal object_inspection_started
+signal object_inspection_stopped
 
 func emit(signal_name, args):
 	emit_signal(signal_name, args)
@@ -51,3 +53,11 @@ func _on_player_rotated(facing):
 func _on_progress_changed(flag_name: String, value: bool):
 	if OS.is_debug_build():
 		print("SignalBus: %s has been set to %s." % [flag_name, value])
+
+func _on_object_inspection_started(object_name: String):
+	if OS.is_debug_build():
+		print("SignalBus: Started inspecting %s" % [object_name])
+
+func _on_object_inspection_stopped(object_name: String):
+	if OS.is_debug_build():
+		print("SignalBus: Stopped inspecting %s" % [object_name])

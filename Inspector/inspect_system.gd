@@ -33,7 +33,7 @@ func try_inspect_object(object_name: String) -> bool:
 	
 	original_camera.current = false
 	inspect_camera.current = true
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	
 	return true
 
@@ -46,6 +46,7 @@ func stop_inspection():
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	
 	is_inspecting = false
+	Signals.object_inspection_stopped.emit()
 
 func _input(event):
 	if not is_inspecting:

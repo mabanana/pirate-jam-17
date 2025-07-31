@@ -1,9 +1,10 @@
-[gd_scene load_steps=47 format=3 uid="uid://bpnwkjxqnh3k3"]
+[gd_scene load_steps=48 format=3 uid="uid://bpnwkjxqnh3k3"]
 
 [ext_resource type="ArrayMesh" uid="uid://bnv514k6t6s31" path="res://Assets/3D Models/Desk/Desk Game Res.obj" id="1_i7vs8"]
 [ext_resource type="Script" uid="uid://788olr5sdccm" path="res://UI/reading_controller.gd" id="2_44dum"]
 [ext_resource type="ArrayMesh" uid="uid://dcjtsrgsent24" path="res://Assets/3D Models/Cardboard Box/Cardboard Box Game Res.obj" id="2_x07kc"]
 [ext_resource type="ArrayMesh" uid="uid://q62x1uegjypk" path="res://Assets/3D Models/Mattress/Mattress Game Res.obj" id="3_fpb7c"]
+[ext_resource type="Script" uid="uid://3l3pwso0euws" path="res://Inspector/can_inspect.gd" id="3_gvnox"]
 [ext_resource type="Texture2D" uid="uid://b5nfesbk6cm0s" path="res://Assets/3D Models/Mattress/Texture Maps/Mattress Base Color.png" id="4_hjiva"]
 [ext_resource type="Texture2D" uid="uid://dg6bdr0cp5bq0" path="res://Assets/3D Models/Mattress/Texture Maps/Mattress Normal.png" id="5_2bgig"]
 [ext_resource type="Texture2D" uid="uid://c235brwu18ffl" path="res://Assets/3D Models/Mattress/Texture Maps/Mattress Roughness.png" id="6_qgm3m"]
@@ -201,15 +202,16 @@ mesh = SubResource("BoxMesh_qgm3m")
 skeleton = NodePath("../../..")
 
 [node name="Computer" type="StaticBody3D" parent="Objects"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.99364, 0.903951, -3.2278)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.994, 1.4, -3.228)
+script = ExtResource("3_gvnox")
 
 [node name="StaticObject3" type="MeshInstance3D" parent="Objects/Computer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.229074)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.229074)
 mesh = SubResource("BoxMesh_ka5ae")
 skeleton = NodePath("../../../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/Computer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.229074)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.229074)
 shape = SubResource("ConvexPolygonShape3D_3o5qk")
 
 [node name="SubViewport" type="SubViewport" parent="Objects/Computer"]
@@ -217,7 +219,7 @@ shape = SubResource("ConvexPolygonShape3D_3o5qk")
 [node name="ComputerScreen" parent="Objects/Computer/SubViewport" instance=ExtResource("11_d2jpr")]
 
 [node name="Screen" type="MeshInstance3D" parent="Objects/Computer"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.511656, -0.163417)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -0.163417)
 mesh = SubResource("PlaneMesh_44dum")
 surface_material_override/0 = SubResource("ShaderMaterial_8um3o")
 
@@ -227,6 +229,7 @@ spot_attenuation = 2.01
 
 [node name="Phonebook" type="StaticBody3D" parent="Objects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00100708, 0.877316, -3.12601)
+script = ExtResource("3_gvnox")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Objects/Phonebook"]
 shape = SubResource("ConcavePolygonShape3D_qo4ke")
@@ -268,6 +271,7 @@ surface_material_override/0 = SubResource("ORMMaterial3D_gvnox")
 
 [node name="Medication" type="StaticBody3D" parent="Objects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.35407, 1.47348, -3.17884)
+script = ExtResource("3_gvnox")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/Medication"]
 mesh = SubResource("CylinderMesh_d2jpr")
@@ -278,6 +282,7 @@ shape = SubResource("CylinderShape3D_8um3o")
 
 [node name="Blood" type="StaticBody3D" parent="Objects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.26711, 0.216651, 2.06369)
+script = ExtResource("3_gvnox")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/Blood"]
 mesh = SubResource("BoxMesh_d2jpr")
@@ -287,6 +292,7 @@ shape = SubResource("BoxShape3D_8um3o")
 
 [node name="LetterOfApology" type="StaticBody3D" parent="Objects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.524914, 0.899998, -3.28702)
+script = ExtResource("3_gvnox")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/LetterOfApology"]
 mesh = SubResource("BoxMesh_d2jpr")
